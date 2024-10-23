@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import 'dart:convert'; // For JSON decoding
+import 'dart:convert'; 
 import 'package:apg2024/brochureView.dart'; 
-import 'data_fetcher.dart'; // Import your data fetcher
-import 'data_struct.dart';  // Import your data structure
+import 'data_fetcher.dart'; 
 import 'CECourseView.dart';
+import 'ScheduleView.dart';
+import 'AuthorsView.dart';
+import 'TracksView.dart';
 
-void main() {
-  runApp(MyApp());  
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DataManager().fetchData(); // Fetch all data when the app starts
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,24 +21,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),  // Main Home screen
+      home: Home(), 
     );
   }
 }
 
 class Home extends StatelessWidget {
-  // URLs for fetching data
-  final String _CECourseurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/CECOURSES.json";
-  final String _Scheduleurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/V_SCHEDULE.json";
-  final String _themesurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/THEMES.json";
-  final String _personsurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/PERSONS.json";
-  final String _galleryurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/IMAGES.json";
-  final String _sponsorsurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/ORGANIZATIONS.json?orderBy=%22OS_TYPE%22&equalTo=%22SPONSOR%22";
-  final String _orgurl = "https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/ORGANIZATIONS.json";
 
   @override
   Widget build(BuildContext context) {
-      double screenHeight = MediaQuery.of(context).size.height;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -61,39 +57,39 @@ class Home extends StatelessWidget {
                 children: [
                   // First Row
                   buildIconRow(context, [
-                    IconButtonData(icon: Icons.book, label: "Sessions", view: TracksView()),
-                    IconButtonData(icon: Icons.calendar_today, label: "Schedule", view: ScheduleView()),
-                    IconButtonData(icon: Icons.favorite, label: "Favourites", view: FavouritesView()),
+                    IconButtonData(icon: Icons.book, color: Color.fromRGBO(70, 116, 167, 1), label: "Sessions", view: TracksView()),
+                    IconButtonData(icon: Icons.calendar_today, color: Color.fromRGBO(70, 116, 167, 1), label: "Schedule", view: ScheduleView()),
+                    IconButtonData(icon: Icons.favorite, color: Color.fromRGBO(70, 116, 167, 1), label: "Favourites", view: FavouritesView()),
                   ]),
                   // Second Row
                   buildIconRow(context, [
-                    IconButtonData(icon: Icons.edit, label: "Keynote\nSpeakers", view: Home()),
-                    IconButtonData(icon: Icons.person, label: "Conference\nLayout", view: Home()),
-                    IconButtonData(icon: Icons.person, label: "Exhibition\nLayout", view: Home()),
+                    IconButtonData(icon: Icons.edit, color: Color.fromRGBO(70, 116, 167, 1), label: "Keynote\nSpeakers", view: Home()),
+                    IconButtonData(icon: Icons.person, color: Color.fromRGBO(70, 116, 167, 1), label: "Conference\nLayout", view: Home()),
+                    IconButtonData(icon: Icons.person, color: Color.fromRGBO(70, 116, 167, 1), label: "Exhibition\nLayout", view: Home()),
                   ]),
                   // Third Row
                   buildIconRow(context, [
-                    IconButtonData(icon: Icons.person, label: "Authors", view: Home()),
-                    IconButtonData(icon: Icons.edit, label: "Registration", view: Home()),
-                    IconButtonData(icon: Icons.group, label: "Sponsors", view: Home()),
+                    IconButtonData(icon: Icons.person, color: Color.fromRGBO(70, 116, 167, 1), label: "Authors", view: AuthorsView()),
+                    IconButtonData(icon: Icons.edit, color: Color.fromRGBO(70, 116, 167, 1), label: "Registration", view: Home()),
+                    IconButtonData(icon: Icons.group, color: Color.fromRGBO(70, 116, 167, 1), label: "Sponsors", view: Home()),
                   ]),
                   // Fourth Row
                   buildIconRow(context, [
-                    IconButtonData(icon: Icons.school, label: "CE Courses", view: CECourseView()),
-                    IconButtonData(icon: Icons.create, label: "Student\nProgram", view: Home()),
-                    IconButtonData(icon: Icons.person, label: "Spouse\nProgram", view: Home()),
+                    IconButtonData(icon: Icons.school, color: Color.fromRGBO(70, 116, 167, 1), label: "CE Courses", view: CECourseView()),
+                    IconButtonData(icon: Icons.create, color: Color.fromRGBO(70, 116, 167, 1), label: "Student\nProgram", view: Home()),
+                    IconButtonData(icon: Icons.person, color: Color.fromRGBO(70, 116, 167, 1), label: "Spouse\nProgram", view: Home()),
                   ]),
                   // Fifth Row
                   buildIconRow(context, [
-                    IconButtonData(icon: Icons.business, label: "Exhibitors", view: Home()),
-                    IconButtonData(icon: Icons.phone, label: "Contacts", view: Home()),
-                    IconButtonData(icon: Icons.map, label: "Navigate", view: Home()),
+                    IconButtonData(icon: Icons.business, color: Color.fromRGBO(70, 116, 167, 1), label: "Exhibitors", view: Home()),
+                    IconButtonData(icon: Icons.phone, color: Color.fromRGBO(70, 116, 167, 1), label: "Contacts", view: Home()),
+                    IconButtonData(icon: Icons.map, color: Color.fromRGBO(70, 116, 167, 1), label: "Navigate", view: Home()),
                   ]),
                   // Sixth Row
                   buildIconRow(context, [
-                    IconButtonData(icon: Icons.photo_album, label: "Photo\nGallery", view: Home()),
-                    IconButtonData(icon: Icons.touch_app, label: "Career\nSymposium", view: Home()),
-                    IconButtonData(icon: Icons.public, label: "Geo\nHorizons", view: Home()),
+                    IconButtonData(icon: Icons.photo_album, color: Color.fromRGBO(70, 116, 167, 1), label: "Photo\nGallery", view: Home()),
+                    IconButtonData(icon: Icons.touch_app, color: Color.fromRGBO(70, 116, 167, 1), label: "Career\nSymposium", view: Home()),
+                    IconButtonData(icon: Icons.public, color: Color.fromRGBO(70, 116, 167, 1), label: "Geo\nHorizons", view: Home()),
                   ]),
                 ],
               ),
@@ -123,7 +119,7 @@ class Home extends StatelessWidget {
         return Column(
           children: [
             IconButton(
-              icon: Icon(data.icon, size: 30),
+              icon: Icon(data.icon, size: 30, color: data.color),  // Apply color to the icon
               onPressed: () {
                 // Navigate to corresponding view
                 Navigator.push(context, MaterialPageRoute(builder: (context) => data.view));
@@ -132,7 +128,7 @@ class Home extends StatelessWidget {
             Text(
               data.label,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15),
+              style: TextStyle(fontSize: 15, color: data.color),  // Apply color to the label text
             ),
           ],
         );
@@ -146,22 +142,14 @@ class IconButtonData {
   final IconData icon;
   final String label;
   final Widget view;
+  final Color color; 
 
-  IconButtonData({required this.icon, required this.label, required this.view});
-}
-
-class TracksView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Tracks')));
-  }
-}
-
-class ScheduleView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Schedule')));
-  }
+  IconButtonData({
+    required this.icon, 
+    required this.label, 
+    required this.view, 
+    required this.color,
+  });
 }
 
 class FavouritesView extends StatelessWidget {
