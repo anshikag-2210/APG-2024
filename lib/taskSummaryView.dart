@@ -22,6 +22,7 @@ class _TaskSummaryViewState extends State<TaskSummaryView> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Paper Details'),
+        backgroundColor: Color.fromRGBO(70, 116, 167, 1), 
       ),
       body: SingleChildScrollView(
         child: Padding(

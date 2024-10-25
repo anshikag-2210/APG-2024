@@ -10,7 +10,8 @@ class CECourseDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       title: Text("${ceCourse.CE_COURSEID} Detail View"),// Display the course title in the AppBar
+       title: Text("${ceCourse.CE_COURSEID} Detail View"),
+       backgroundColor: Color.fromRGBO(70, 116, 167, 1), 
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

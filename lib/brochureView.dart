@@ -6,20 +6,18 @@ class BrochureView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Launch the URL as soon as the widget is built
     _launchBrochureURL();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Brochure View'),
+        backgroundColor: Color.fromRGBO(70, 116, 167, 1), 
       ),
       body: Center(
         child: CircularProgressIndicator(), // Show a loading indicator while the URL is opening
       ),
     );
   }
-
-  // Function to open the URL in the browser
   Future<void> _launchBrochureURL() async {
     if (await canLaunch(brochureUrl)) {
       await launch(brochureUrl); // Opens the URL in the browser automatically

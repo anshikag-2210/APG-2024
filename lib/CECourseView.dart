@@ -7,12 +7,12 @@ import 'CECourseDetailView.dart';
 class CECourseView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Access the fetched data from DataManager
     final ceCourses = DataManager().ceCourses; 
 
     return Scaffold(
       appBar: AppBar(
         title: Text("CE Course"),
+        backgroundColor: Color.fromRGBO(70, 116, 167, 1), 
       ),
       body: ceCourses.isEmpty 
           ? Center(child: CircularProgressIndicator()) // Show loader if data is empty initially

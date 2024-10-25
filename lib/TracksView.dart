@@ -36,18 +36,28 @@ class TracksView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Icon(Icons.dehaze, color: Colors.green),
-                          SizedBox(width: 8.0),
-                          Text(
-                            key,
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      ExpansionTile(
+                        initiallyExpanded: true,
+                        // Background color for the heading
+                        tilePadding: EdgeInsets.symmetric(horizontal: 8.0), // Aligns the icon and text
+                        title: Container(
+                          color: Color.fromRGBO(70, 116, 167, 1), // Set background color to the header
+                          padding: EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.dehaze, color: Colors.white), // Icon color set to white
+                              SizedBox(width: 8.0),
+                              Text(
+                                key,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Colors.white, // Font color set to white
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                      SizedBox(height: 8.0),
-                      Column(
+                        ),
                         children: groupedThemesData[key]!.map((_theme) {
                           // Filter schedule data based on theme ID
                           var filteredScheduleData = scheduleDataArr.where((scheduleItem) {
@@ -69,14 +79,19 @@ class TracksView extends StatelessWidget {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: Color.fromRGBO(234, 242, 255, 1),
+                                    color: Color.fromRGBO(234, 242, 255, 1), // Light blue background for each item
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   padding: EdgeInsets.all(16.0),
-                                  child: Text(
-                                    _theme.TH_THEME,
-                                    style: TextStyle(color: Colors.green, fontSize: 14),
-                                    textAlign: TextAlign.left,
+                                  child: Align(
+                                    alignment: Alignment.centerLeft, // Aligns text to the left
+                                    child: Text(
+                                      _theme.TH_THEME,
+                                      style: TextStyle(
+                                        color: Color.fromRGBO(70, 116, 167, 1), // Consistent text color for items
+                                        fontSize: 14,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
