@@ -9,6 +9,7 @@ import 'TracksView.dart';
 import 'keynoteSpeakersView.dart';
 import 'UrlView.dart';
 import 'sponsorsView.dart';
+import 'footerview.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -110,20 +111,10 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
-            // Footer
-            Container(
-              color: Color.fromRGBO(70, 116, 167, 1),
-              height: 40,
-              child: Center(
-                child: Text(
-                  'Welcome to APG 2024',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
           ],
         ),
       ),
+    bottomNavigationBar: FooterView(),
     );
   }
 
@@ -142,7 +133,6 @@ class Home extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => data.view));
               },
             ),
-            // SizedBox(height: 06),
             Text(
               data.label,
               textAlign: TextAlign.center,

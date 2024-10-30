@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'APG 2024',
-      home: Home(),
+      home: MyApp(),
     );
   }
 }
