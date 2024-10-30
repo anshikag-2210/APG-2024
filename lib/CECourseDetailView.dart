@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'data_struct.dart'; // Import your data structure
+import 'data_struct.dart';
+import 'footerview.dart'; 
 
 class CECourseDetailView extends StatelessWidget {
   final CECourseStruct ceCourse; // Receive the data
@@ -32,6 +33,7 @@ class CECourseDetailView extends StatelessWidget {
           ),
         ),
       ),
+    bottomNavigationBar: FooterView(),
     );
   }
 

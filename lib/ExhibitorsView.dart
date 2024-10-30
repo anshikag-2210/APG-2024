@@ -3,10 +3,10 @@ import 'data_fetcher.dart';
 import 'UrlView.dart';
 import 'footerview.dart';
 
-class SponsorsView extends StatelessWidget {
+class ExhibitorsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final sponsorsData = DataManager().orgData.where((org) => org.OS_TYPE == 'SPONSOR').toList();
+    final sponsorsData = DataManager().orgData.where((org) => org.OS_TYPE == 'Exhibitor').toList();
 
     // Group sponsors by subtype
     final groupedSponsors = <String, List<dynamic>>{};
@@ -18,7 +18,8 @@ class SponsorsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('SPONSORS',
+        title: Text(
+          'EXHIBITORS',
           style: TextStyle(
             color: Colors.white, // Set your desired color here
           ),
@@ -120,5 +121,5 @@ class SponsorsView extends StatelessWidget {
             ),
       bottomNavigationBar: FooterView(),
     );
-  }
+   }
 }
