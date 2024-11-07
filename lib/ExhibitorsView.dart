@@ -85,7 +85,7 @@ class ExhibitorsView extends StatelessWidget {
                                         maxHeight: 200,
                                       ),
                                       child: Image.network(
-                                        'https://yourimageurl/CMP_${sponsor.CMB_ID}.png',
+                                        '${DataManager().allUrls["companyLogoUrl"]}${sponsor.CMB_ID}.png',
                                         fit: BoxFit.cover,
                                         errorBuilder: (context, error, stackTrace) {
                                           return Icon(

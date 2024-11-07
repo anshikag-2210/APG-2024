@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'APG 2024',
+      title: 'GeoIndia 2024',
       home: Home(),
     );
   }

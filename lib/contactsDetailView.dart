@@ -12,7 +12,10 @@ class ContactsDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Contact Details"),
+      appBar: AppBar(title: Text("Contact Details",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
        backgroundColor: Color.fromRGBO(70, 116, 167, 1),),
       body: Column(
         children: [
@@ -37,7 +40,7 @@ class ContactsDetailView extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            item.PD_WORKPROFILE,
+                            item.PD_ORGANIZATION,
                             style: TextStyle(
                               color: const Color.fromARGB(255, 111, 109, 109), // Adjust color as needed
                             ),

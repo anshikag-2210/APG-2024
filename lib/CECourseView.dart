@@ -11,7 +11,10 @@ class CECourseView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("CE Courses"),
+        title: Text("CE Courses",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: ceCourses.isEmpty

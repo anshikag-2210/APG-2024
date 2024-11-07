@@ -14,7 +14,10 @@ class UrlView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(title,
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: Center(

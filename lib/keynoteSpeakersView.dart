@@ -11,7 +11,10 @@ class KeynoteSpeakersView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Keynote Speakers'),
+        title: Text('Keynote Speakers',
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: keyNoteSpeakers.isEmpty
@@ -50,12 +53,11 @@ class KeynoteSpeakersView extends StatelessWidget {
                       children: [
                         CircleAvatar(
                           radius: 25,
-                          backgroundColor: Colors.grey[300], // Background color for the avatar
+                          backgroundColor: Colors.grey[300], 
                           child: Image.network(
-                            'https://yourimageurl/${item.CMB_ID}.png', // Replace with real image source
+                            '${DataManager().allUrls["keynoteSpeakersPhotoUrl"]}${item.CMB_ID}.png', 
                             fit: BoxFit.cover,
                             errorBuilder: (context, error, stackTrace) {
-                              // Show an icon if the image fails to load
                               return Icon(Icons.person, color: Colors.grey, size: 40); // Dummy person icon
                             },
                           ),

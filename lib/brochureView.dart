@@ -10,7 +10,10 @@ class BrochureView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Brochure View'),
+        title: const Text('Brochure View',
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1), 
       ),
       body: Center(

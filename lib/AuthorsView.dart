@@ -7,10 +7,12 @@ class AuthorsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final personsData = DataManager().persons.where((person) => person.PD_PTYPE == 'AUTHOR').toList();
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Authors"),
+        title: Text("Authors",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: ListView.builder(
@@ -20,7 +22,7 @@ class AuthorsView extends StatelessWidget {
           return Container(
             margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0), // Space between list items
             decoration: BoxDecoration(
-              color: Colors.lightBlue[50], // Very light blue background color
+              color: Colors.lightBlue[50], 
               borderRadius: BorderRadius.circular(8.0), // Rounded corners
               boxShadow: [
                 BoxShadow(
@@ -33,13 +35,13 @@ class AuthorsView extends StatelessWidget {
             ),
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: Colors.grey[300], // Background color for the avatar
+                backgroundColor: Colors.grey[300], 
                 child: Image.network(
-                  "https://example.com/images/${person.CMB_ID}",
+                  '${DataManager().allUrls["authorsPhotoUrl"]}${person.CMB_ID}.png',
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
                     // Show an icon if the image fails to load
-                    return Icon(Icons.person, color: Colors.grey, size: 40); // Dummy person icon
+                    return Icon(Icons.person, color: Colors.grey, size: 40); 
                   },
                 ),
               ),
@@ -47,12 +49,12 @@ class AuthorsView extends StatelessWidget {
                 person.PD_NAME,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color.fromRGBO(70, 116, 167, 1), // Custom text color
+                  color: Color.fromRGBO(70, 116, 167, 1), 
                 ),
               ),
               subtitle: Text(
                 person.PD_ORGANIZATION,
-                style: TextStyle(color: Color.fromRGBO(70, 116, 167, 1)), // Custom text color for subtitle
+                style: TextStyle(color: Color.fromRGBO(70, 116, 167, 1)), 
               ),
               onTap: () {
                 Navigator.push(

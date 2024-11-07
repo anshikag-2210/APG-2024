@@ -44,7 +44,10 @@ class _GalleryViewState extends State<GalleryView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Gallery"),
+        title: Text("Gallery",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: groupedPhotos.isEmpty
@@ -81,7 +84,7 @@ class _GalleryViewState extends State<GalleryView> {
                           mainAxisSpacing: 2,
                         ),
                         itemBuilder: (context, index) {
-                          String imageUrl = 'https://spg23-03112023.web.app/images/${photosForCategory[index].IM_PATH}';
+                          String imageUrl = '${photosForCategory[index].IM_PATH}';
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(

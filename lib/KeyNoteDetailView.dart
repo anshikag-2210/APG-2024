@@ -14,8 +14,8 @@ class KeyNoteDetailView extends StatefulWidget {
 }
 
 class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
-  // Using a Set to track favorite states for each item
   Set<int> favoritedItems = {};
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,10 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('KeyNote Details'),
+        title: Text( widget.keyNoteSpeaker.PD_NAME,
+            style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1), // Use specified color
       ),
       body: SingleChildScrollView(
@@ -36,15 +39,14 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
             children: [
               CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage('https://yourimageurl/${widget.keyNoteSpeaker.CMB_ID}.png'), // Example image URL
+                backgroundImage: NetworkImage('${DataManager().allUrls["keynoteSpeakersPhotoUrl"]}${widget.keyNoteSpeaker.CMB_ID}.png'),
                 onBackgroundImageError: (error, stackTrace) {
-                  // Return null to use the default icon when the image fails to load
                   return null; 
                 },
                 child: Icon(
-                  Icons.person, // Fallback icon if the image fails to load
+                  Icons.person, 
                   size: 50,
-                  color: Colors.grey, // Icon color
+                  color: Colors.grey, 
                 ),
               ),
               SizedBox(height: 10),
@@ -74,11 +76,10 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
                   var authPaper = filteredAuthorData[index];
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 5),
-                    child: Stack( // Use Stack to position the icon
+                    child: Stack( 
                       children: [
-                        Column( // Change from ListTile to Column
+                        Column( 
                           children: [
-                            // Top Row with Favorite Icon
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -88,7 +89,7 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
                                       '${authPaper.EVT_PAPER_EVENT_PAPERID} (${authPaper.EVT_TYPE})',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(70, 116, 167, 1), // Use specified color
+                                        color: Color.fromRGBO(70, 116, 167, 1), 
                                         fontSize: 13,
                                       ),
                                     ),
@@ -97,12 +98,12 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
                                       children: [
                                         Text(
                                           authPaper.EVT_TITLE,
-                                          style: TextStyle(color: Color.fromRGBO(70, 116, 167, 1), fontSize: 12), // Use specified color
+                                          style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 13), 
                                         ),
                                         SizedBox(height: 5),
                                         Text(
                                           'Session: ${authPaper.TH_THEME}',
-                                          style: TextStyle(color: Colors.grey, fontSize: 11),
+                                          style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
                                         ),
                                         SizedBox(height: 5),
                                         Row(

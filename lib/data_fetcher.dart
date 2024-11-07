@@ -8,7 +8,8 @@ String scheduleUrl = 'https://geoindia2024-default-rtdb.asia-southeast1.firebase
 String personsUrl = 'https://geoindia2024-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/PERSONS.json';
 String themeUrl = 'https://geoindia2024-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/THEMES.json'; 
 String organizationsUrl = 'https://geoindia2024-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/ORGANIZATIONS.json';
-String galleryUrl = 'https://spg23-03112023-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/IMAGES.json';
+String galleryUrl = 'https://geoindia2024-default-rtdb.asia-southeast1.firebasedatabase.app/tabs/data/IMAGES_IOS.json';
+String base_url = 'https://geoindia2024-default-rtdb.asia-southeast1.firebasedatabase.app/urls.json';
 
 class DataManager {
   static final DataManager _instance = DataManager._internal();
@@ -25,6 +26,7 @@ class DataManager {
   List<ThemeStruct> themesData = [];
   List<OrganizationsStruct> orgData = [];
   List<GalleryStruct> galleryData = [];
+  Map<String, String> allUrls = {};
 
 Future<void> fetchData() async {
   try {
@@ -36,9 +38,16 @@ Future<void> fetchData() async {
 
   try {
     await fetchScheduleData();
-    print('Schedule data fetched successfully');
+    print('Schedules data fetched successfully');
   } catch (e) {
-    print('Error fetching Schedule data: $e');
+    print('Error fetching schedules data: $e');
+  }
+
+  try {
+    await fetchUrls();
+    print('urls data fetched successfully');
+  } catch (e) {
+    print('Error fetching urls data: $e');
   }
 
   try {
@@ -68,8 +77,14 @@ Future<void> fetchData() async {
   } catch (e) {
     print('Error fetching Gallery data: $e');
   }
-}
 
+  try {
+    await fetchCECoursedata();
+    print('CE Courses data fetched successfully');
+  } catch (e) {
+    print('Error fetching CE Courses data: $e');
+  }
+}
 
   Future<void> fetchCECoursedata() async {
     final response = await http.get(Uri.parse(ceCourseUrl));
@@ -131,6 +146,23 @@ Future<void> fetchData() async {
     }
   }
 
-
+  Future<void> fetchUrls() async {
+    final response = await http.get(Uri.parse(base_url));
+    if (response.statusCode == 200) {
+      Map<String, dynamic> decodedData = json.decode(response.body);
+      allUrls = {};
+     decodedData.forEach((key, value) {
+      if (value is String) {
+        allUrls[key] = value;
+      } else {
+        allUrls[key] = '';  
+        print('Warning: Key $key has a non-string value, assigning default.');
+      }
+    });
+    print('Data fetched successfully');
+  } else {
+    throw Exception('Failed to load data from $base_url');
+  }
+}
 }
 

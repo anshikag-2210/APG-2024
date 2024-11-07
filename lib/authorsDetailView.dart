@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'data_struct.dart'; // Import persons structure
-import 'data_fetcher.dart'; // Import DataManager for schedule data
+import 'data_struct.dart'; 
+import 'data_fetcher.dart'; 
 import 'footerview.dart';
 import 'taskSummaryView.dart';
 
@@ -18,34 +18,33 @@ class _AuthorsDetailViewState extends State<AuthorsDetailView> {
 
   @override
   Widget build(BuildContext context) {
-    // Filter schedule data based on the author's ID
     List<ScheduleStruct> filteredAuthorData = DataManager().schedules.where((scheduleItem) {
       return scheduleItem.AU_ID == widget.author.CMB_ID;
     }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Author Details'),
+        title: Text(widget.author.PD_NAME,
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1), // Use specified color
       ),
-      body: SingleChildScrollView(
+   body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0), 
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center, // Center align the column content
             children: [
-              // Centered Avatar and Name
               CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage('https://yourimageurl/${widget.author.CMB_ID}.png'), // Example image URL
+                backgroundImage: NetworkImage('${DataManager().allUrls["authorsPhotoUrl"]}${widget.author.CMB_ID}.png'), 
                 onBackgroundImageError: (error, stackTrace) {
-                  // Return null to use the default icon when the image fails to load
                   return null; 
                 },
                 child: Icon(
-                  Icons.person, // Fallback icon if the image fails to load
+                  Icons.person, 
                   size: 50,
-                  color: Colors.grey, // Icon color
+                  color: Colors.grey, 
                 ),
               ),
               SizedBox(height: 10),
@@ -56,16 +55,14 @@ class _AuthorsDetailViewState extends State<AuthorsDetailView> {
                   fontSize: 20,
                   color: Color.fromRGBO(70, 116, 167, 1), // Use specified color
                 ),
-                textAlign: TextAlign.center, // Center align the text
               ),
               SizedBox(height: 10),
-              // Work profile, organization, and country
               Column(
-                crossAxisAlignment: CrossAxisAlignment.center, // Center align these texts as well
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(widget.author.PD_WORKPROFILE, maxLines: 2, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center), // Prevent overflow
-                  Text(widget.author.PD_ORGANIZATION, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
-                  Text(widget.author.PD_COUNTRY, maxLines: 1, overflow: TextOverflow.ellipsis, textAlign: TextAlign.center),
+                  Text(widget.author.PD_WORKPROFILE),
+                  Text(widget.author.PD_ORGANIZATION),
+                  Text(widget.author.PD_COUNTRY),
                 ],
               ),
               SizedBox(height: 20),
@@ -77,72 +74,76 @@ class _AuthorsDetailViewState extends State<AuthorsDetailView> {
                   var authPaper = filteredAuthorData[index];
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 5),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start, // Align items to the start
-                        children: [
-                          // Row with Favorite Icon
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  '${authPaper.EVT_PAPER_EVENT_PAPERID} (${authPaper.EVT_TYPE})',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(70, 116, 167, 1), // Use specified color
-                                    fontSize: 13,
+                    child: Stack( 
+                      children: [
+                        Column( 
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: ListTile(
+                                    title: Text(
+                                      '${authPaper.EVT_PAPER_EVENT_PAPERID} (${authPaper.EVT_TYPE})',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Color.fromRGBO(70, 116, 167, 1), 
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                    subtitle: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          authPaper.EVT_TITLE,
+                                          style: TextStyle(color:const Color.fromARGB(255, 35, 35, 36), fontSize: 13), 
+                                        ),
+                                        SizedBox(height: 5),
+                                        Text(
+                                          'Session: ${authPaper.TH_THEME}',
+                                          style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
+                                        ),
+                                        SizedBox(height: 5),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(authPaper.SLOT_VENUE1),
+                                            Text('${authPaper.SLOT_START} - ${authPaper.SLOT_DATE}'),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => TaskSummaryView(event: authPaper),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
-                              ),
-                              IconButton(
-                                icon: Icon(
-                                  favoritedItems.contains(index) ? Icons.favorite : Icons.favorite_border,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    // Toggle the favorite status
-                                    if (favoritedItems.contains(index)) {
-                                      favoritedItems.remove(index);
-                                    } else {
-                                      favoritedItems.add(index);
-                                    }
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                          // Subtitle
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                authPaper.EVT_TITLE,
-                                style: TextStyle(color: Color.fromRGBO(70, 116, 167, 1), fontSize: 12), // Use specified color
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis, // Prevent overflow
-                              ),
-                              SizedBox(height: 5),
-                              Text(
-                                'Session: ${authPaper.TH_THEME}',
-                                style: TextStyle(color: Colors.grey, fontSize: 11),
-                              ),
-                              SizedBox(height: 5),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(
-                                    child: Text(authPaper.SLOT_VENUE1, overflow: TextOverflow.ellipsis), // Prevent overflow
+                                IconButton(
+                                  icon: Icon(
+                                    favoritedItems.contains(index) ? Icons.favorite : Icons.favorite_border,
+                                    color: Colors.red,
                                   ),
-                                  Text('${authPaper.SLOT_START} - ${authPaper.SLOT_DATE}'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                                  onPressed: () {
+                                    setState(() {
+                                      // Toggle the favorite status
+                                      if (favoritedItems.contains(index)) {
+                                        favoritedItems.remove(index);
+                                      } else {
+                                        favoritedItems.add(index);
+                                      }
+                                    });
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -151,7 +152,8 @@ class _AuthorsDetailViewState extends State<AuthorsDetailView> {
           ),
         ),
       ),
-      bottomNavigationBar: FooterView(), // Include footer view
+     
+    bottomNavigationBar: FooterView(), // Include footer view
     );
   }
 }

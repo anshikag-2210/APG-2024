@@ -14,13 +14,16 @@ class FullScreenImageViewer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Gallery View"),
+        title: Text("Gallery View",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),
         builder: (BuildContext context, int index) {
-          String imageUrl = 'https://spg23-03112023.web.app/images/${images[index].IM_PATH}';
+          String imageUrl = '${images[index].IM_PATH}';
           return PhotoViewGalleryPageOptions(
             imageProvider: NetworkImage(imageUrl),
             initialScale: PhotoViewComputedScale.contained,
@@ -43,7 +46,7 @@ class FullScreenImageViewer extends StatelessWidget {
             ),
           );
         },
-        backgroundDecoration: BoxDecoration(color: Colors.white),
+        backgroundDecoration: BoxDecoration(color: Colors.black),
         pageController: PageController(initialPage: initialIndex),
         onPageChanged: (index) {
           // Handle page change if needed

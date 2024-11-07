@@ -19,7 +19,10 @@ class ContactsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Contacts"),
+        title: Text("Contacts",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1), // Match the color from AuthorsDetailView
       ),
       body: groupedContacts.isEmpty

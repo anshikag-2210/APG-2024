@@ -78,7 +78,10 @@ class _FileViewerPageState extends State<FileViewerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title),
+      appBar: AppBar(title: Text(widget.title,
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
       backgroundColor: Color.fromRGBO(70, 116, 167, 1),),
       body: isLoading
           ? Center(child: CircularProgressIndicator())

@@ -23,7 +23,10 @@ class TracksView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sessions'),
+        title: Text('Tracks',
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: groupedThemesData.isEmpty

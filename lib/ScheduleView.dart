@@ -26,7 +26,10 @@ class _ScheduleViewState extends State<ScheduleView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Schedule"),
+        title: Text("Schedule",
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: Column(
@@ -34,9 +37,9 @@ class _ScheduleViewState extends State<ScheduleView> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              width: double.infinity, // Ensure the container takes full width
+              width: double.infinity, 
               decoration: BoxDecoration(
-                color: Color.fromRGBO(70, 116, 167, 1), // Background color
+                color: Color.fromRGBO(70, 116, 167, 1), 
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: Row(
@@ -49,11 +52,11 @@ class _ScheduleViewState extends State<ScheduleView> {
                       });
                     },
                     child: Container(
-                      color: selectedTab == 0 ? Colors.white : Colors.transparent, // Change background color
-                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), // Padding for the button
+                      color: selectedTab == 0 ? Colors.white : Colors.transparent, 
+                      padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), 
                       child: Text(
                         "Day 1",
-                        style: TextStyle(color: Colors.black), // Text color remains constant
+                        style: TextStyle(color: selectedTab == 0 ? Colors.black : Colors.white,), // Text color remains constant
                       ),
                     ),
                   ),
@@ -68,7 +71,7 @@ class _ScheduleViewState extends State<ScheduleView> {
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), // Padding for the button
                       child: Text(
                         "Day 2",
-                        style: TextStyle(color: Colors.black), // Text color remains constant
+                        style: TextStyle(color: selectedTab == 1 ? Colors.black : Colors.white,), // Text color remains constant
                       ),
                     ),
                   ),
@@ -83,7 +86,7 @@ class _ScheduleViewState extends State<ScheduleView> {
                       padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0), // Padding for the button
                       child: Text(
                         "Day 3",
-                        style: TextStyle(color: Colors.black), // Text color remains constant
+                        style: TextStyle(color: selectedTab == 2 ? Colors.black : Colors.white,), 
                       ),
                     ),
                   ),

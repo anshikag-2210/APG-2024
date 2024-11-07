@@ -12,7 +12,10 @@ class TracksDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tracks'),
+        title: Text('Tracks',
+          style: TextStyle(
+            color: Colors.white, // Set your desired color here
+          ),),
         backgroundColor: Color.fromRGBO(70, 116, 167, 1), // App bar color
       ),
       body: ListView.builder(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:convert'; 
-import 'package:apg2024/brochureView.dart'; 
 import 'data_fetcher.dart'; 
 import 'CECourseView.dart';
 import 'ScheduleView.dart';
@@ -14,6 +13,8 @@ import 'ExhibitorsView.dart';
 import 'FileViewerPage.dart'; 
 import 'contactsView.dart';
 import 'galleryView.dart';
+import 'FavouritesView.dart';
+import 'sideBarView.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'APG 2024',  // App title
+      title: 'GeoIndia', 
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -34,30 +35,53 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+class _HomeScreenState extends  State<Home>  {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override 
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    String ExbhLayoutUrl= "https://firebasestorage.googleapis.com/v0/b/spg23-03112023.appspot.com/o/Layout%2FExbhLayout.jpg?alt=media&token=08ef97e1-e0a0-4589-9461-793d55492989";
-    String ConferenceLayoutUrl= "https://firebasestorage.googleapis.com/v0/b/spg23-03112023.appspot.com/o/Layout%2FConference.pdf?alt=media&token=6e7d87b5-d6d0-4dad-9a97-5590dd164c79";
-    String RegistrationUrl =  "https://apgindia.org/geoindia2024/registration/?pgID=geoindia/registration/";
-    String navigationUrl = "https://g.co/kgs/DrrLukT";
-    String BrochureUrl = "https://apgindia.org/UserFiles/files/Geoindia-2024-Brochure.pdf";
-    String studentProgramUrl = "https://firebasestorage.googleapis.com/v0/b/spg23-03112023.appspot.com/o/Program%2FStudent.pdf?alt=media&token=440bd8b8-96e6-45bc-98aa-84eec6c4f4e4";
-    // String spouseProgramUrl = "https://firebasestorage.googleapis.com/v0/b/spg23-03112023.appspot.com/o/Program%2FSpouses.pdf?alt=media&token=514e86ed-af5d-493a-8481-39a7ca96fe9e";
+    String galleryUrl = DataManager().allUrls["galleryUrl"] ?? '';
+    String ExbhLayoutUrl = DataManager().allUrls["ExbhLayoutUrl"] ?? '';    
+    String ConferenceLayoutUrl =  DataManager().allUrls["ConferenceLayoutUrl"] ?? ''; 
+    String navigationUrl =  DataManager().allUrls["navigationUrl"] ?? '';
+    String BrochureUrl =  DataManager().allUrls["BrochureUrl"] ?? '';
+    String spouseProgramUrl =  DataManager().allUrls["spouseProgramUrl"] ?? '';
+    String studentProgramUrl =  DataManager().allUrls["studentProgramUrl"] ?? '';
+    String RegistrationUrl =  DataManager().allUrls["RegistrationUrl"] ?? '';
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text(
+          'Geo India 2024',
+          style: TextStyle(
+            color: Colors.white, // Text color
+            fontSize: 25.0, // Font size
+            fontFamily: 'YourFontFamily', // Replace with the desired font family
+            fontWeight: FontWeight.bold, // Optional: makes the text bold
+          ),
+          textAlign: TextAlign.center,
+          ),
+        backgroundColor: Color.fromRGBO(70, 116, 167, 1),
+        leading: IconButton(
+          icon: Icon(Icons.menu, color: Colors.white,),
+          onPressed: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+        ),
       ),
+      drawer: Sidebar(), 
       body: Center( // Center the entire body
         child: Column(
           children: [
             // Header Image
             GestureDetector(
               onTap: () {
-                // Navigate to brochure view
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -69,7 +93,7 @@ class Home extends StatelessWidget {
                 );
               },
               child: Image.asset(
-                'images/showcasespg.png', // Your local image
+                'images/bgImage.png', // Your local image
                 height: screenHeight * 0.25,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -92,7 +116,8 @@ class Home extends StatelessWidget {
                       IconButtonData(icon: Icons.grid_view, color: Color.fromRGBO(70, 116, 167, 1), label: "Conference\nLayout",
                                 view: FileViewerPage(
                                 fileUrl: ConferenceLayoutUrl,
-                                title: "Conference Layout"),),
+                                title: "Conference Layout"
+                                ),),
                       IconButtonData(icon: Icons.grid_view, color: Color.fromRGBO(70, 116, 167, 1), label: "Exhibition\nLayout", 
                                 view: FileViewerPage(
                                 fileUrl: ExbhLayoutUrl,
@@ -112,10 +137,10 @@ class Home extends StatelessWidget {
                     // Fourth Row
                     buildIconRow(context, [
                       IconButtonData(icon: Icons.dashboard, color: Color.fromRGBO(70, 116, 167, 1), label: "CE Courses", view: CECourseView()),
-                      IconButtonData(icon: Icons.people, color: Color.fromRGBO(70, 116, 167, 1), label: "Student Program", 
+                      IconButtonData(icon: Icons.people, color: Color.fromRGBO(70, 116, 167, 1), label: "Spouse Program", 
                       view: FileViewerPage(
-                                fileUrl: studentProgramUrl,
-                                title: "Student Program"),),
+                                fileUrl: spouseProgramUrl,
+                                title: "Spouse Program"),),
                       IconButtonData(icon: Icons.business, color: Color.fromRGBO(70, 116, 167, 1), label: "Exhibitors", view: ExhibitorsView()),
                     ]),
                     // Fifth Row
@@ -179,11 +204,4 @@ class IconButtonData {
     required this.view, 
     required this.color,
   });
-}
-
-class FavouritesView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text('Favourites')));
-  }
 }
