@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'data_fetcher.dart';
-import 'data_struct.dart';
 import 'footerview.dart';
 import 'CECourseDetailView.dart';
 

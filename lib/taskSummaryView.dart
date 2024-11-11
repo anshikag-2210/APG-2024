@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'data_fetcher.dart'; // Import the fetch function
+// Import the fetch function
 import 'data_struct.dart'; // Import ScheduleStruct
 import 'footerview.dart';
-import 'package:flutter/material.dart';
 
 class TaskSummaryView extends StatefulWidget {
   final ScheduleStruct event;

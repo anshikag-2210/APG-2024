@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:convert'; 
 import 'data_fetcher.dart'; 
 import 'CECourseView.dart';
 import 'ScheduleView.dart';
@@ -26,6 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'GeoIndia', 
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -58,7 +58,7 @@ class _HomeScreenState extends  State<Home>  {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
-          'Geo India 2024',
+          'GeoIndia 2024',
           style: TextStyle(
             color: Colors.white, // Text color
             fontSize: 25.0, // Font size
@@ -182,7 +182,7 @@ class _HomeScreenState extends  State<Home>  {
             Text(
               data.label,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: data.color),  // Apply color to the label text
+              style: TextStyle(fontSize: 13, color: data.color),  // Apply color to the label text
             ),
           ],
         );

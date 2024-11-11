@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'data_fetcher.dart';
 import 'data_struct.dart';
 import 'FullScreenImageView.dart';
@@ -84,7 +82,7 @@ class _GalleryViewState extends State<GalleryView> {
                           mainAxisSpacing: 2,
                         ),
                         itemBuilder: (context, index) {
-                          String imageUrl = '${photosForCategory[index].IM_PATH}';
+                          String imageUrl = photosForCategory[index].IM_PATH;
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(

@@ -16,8 +16,6 @@ class _ScheduleViewState extends State<ScheduleView> {
   Widget build(BuildContext context) {
     // Access the fetched data from DataManager
     final scheduleDataArr = DataManager().schedules; 
-
-    // Group the schedule data by SLOT_DAY
     Map<String, List<ScheduleStruct>> groupedData = scheduleDataArr.fold({}, (Map<String, List<ScheduleStruct>> result, scheduleItem) {
       result[scheduleItem.SLOT_DAY] = result[scheduleItem.SLOT_DAY] ?? [];
       result[scheduleItem.SLOT_DAY]!.add(scheduleItem);
@@ -103,7 +101,7 @@ class _ScheduleViewState extends State<ScheduleView> {
           ),
         ],
       ),
-      bottomNavigationBar: FooterView(), // Call the FooterView at the bottom
+      bottomNavigationBar: FooterView(), 
     );
   }
 }

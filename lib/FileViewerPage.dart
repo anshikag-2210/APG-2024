@@ -40,7 +40,7 @@ class _FileViewerPageState extends State<FileViewerPage> {
       final fileExtension = fileUrl.split('.').last.toLowerCase();
       final fileName = '${widget.title.replaceAll(' ', '_')}.$fileExtension';
       final filePath = '${downloadsDir.path}/$fileName';
-
+      print(filePath);
       setState(() {
         isPdf = fileExtension == 'pdf';
       });

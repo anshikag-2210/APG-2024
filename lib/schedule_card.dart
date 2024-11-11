@@ -2,43 +2,19 @@ import 'package:flutter/material.dart';
 import 'data_struct.dart';
 import 'taskSummaryView.dart';
 
-class ScheduleDetailsView extends StatefulWidget {
-  final List<ScheduleStruct> dayData;
+class ScheduleCard extends StatelessWidget {
+  final ScheduleStruct event;
+  final bool isFavorite;
+  final VoidCallback onFavoriteToggle;
 
-  ScheduleDetailsView({required this.dayData});
-
-  @override
-  _ScheduleDetailsViewState createState() => _ScheduleDetailsViewState();
-}
-
-class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
-  // To track the favorite status of each event
-  List<bool> favoriteStatus = [];
-
-  @override
-  void initState() {
-    super.initState();
-    // Initialize the favorite status list
-    favoriteStatus = List<bool>.filled(widget.dayData.length, false);
-  }
+  ScheduleCard({
+    required this.event,
+    required this.isFavorite,
+    required this.onFavoriteToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
-    print("dayData length: ${widget.dayData.length}");
-    if (widget.dayData.isEmpty) {
-      return Center(child: Text("No events available"));
-    }
-    return ListView.builder(
-      itemCount: widget.dayData.length,
-      itemBuilder: (context, index) {
-        ScheduleStruct event = widget.dayData[index];
-        return _buildEventItem(context, event, index);
-      },
-    );
-  }
-
-  // Method to build individual event item
-  Widget _buildEventItem(BuildContext context, ScheduleStruct event, int index) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -52,7 +28,7 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
         margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color:Color.fromRGBO(234, 242, 255, 1),
+          color: Color.fromRGBO(234, 242, 255, 1),
           borderRadius: BorderRadius.circular(8.0),
           boxShadow: [
             BoxShadow(
@@ -66,17 +42,17 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildEventTitle(event, index),
+            _buildEventTitle(),
             SizedBox(height: 4),
-            _buildEventSubtitle(event),
+            _buildEventSubtitle(),
             SizedBox(height: 4),
-            _buildSessionInfo(event),
+            _buildSessionInfo(),
             SizedBox(height: 4),
-            _buildAuthorInfo(event),
+            _buildAuthorInfo(),
             SizedBox(height: 4),
-            _buildVenue(event),
+            _buildVenue(),
             SizedBox(height: 4),
-            _buildTime(event),
+            _buildTime(),
           ],
         ),
       ),
@@ -84,10 +60,9 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
   }
 
   // Helper method for event title
-  Widget _buildEventTitle(ScheduleStruct event, int index) {
+  Widget _buildEventTitle() {
     return Row(
       children: [
-        // Event Paper ID and Type
         Text(
           event.EVT_PAPER_EVENT_PAPERID,
           style: TextStyle(
@@ -100,27 +75,20 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
           " (${event.EVT_TYPE})",
           style: TextStyle(color: Color.fromRGBO(70, 116, 167, 1), fontSize: 13),
         ),
-        // Favorite button aligned to the right of the row
         Spacer(),
         IconButton(
           icon: Icon(
-            favoriteStatus[index] == true
-                ? Icons.favorite
-                : Icons.favorite_border,
+            isFavorite ? Icons.favorite : Icons.favorite_border,
             color: Colors.red,
           ),
-          onPressed: () {
-            setState(() {
-              favoriteStatus[index] = !favoriteStatus[index]!;
-            });
-          },
+          onPressed: onFavoriteToggle,
         ),
       ],
     );
   }
 
   // Helper method for event subtitle
-  Widget _buildEventSubtitle(ScheduleStruct event) {
+  Widget _buildEventSubtitle() {
     return Text(
       event.EVT_TITLE,
       style: TextStyle(
@@ -131,7 +99,7 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
   }
 
   // Helper method for session info
-  Widget _buildSessionInfo(ScheduleStruct event) {
+  Widget _buildSessionInfo() {
     return Row(
       children: [
         Text(
@@ -153,7 +121,7 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
   }
 
   // Helper method for author info
-  Widget _buildAuthorInfo(ScheduleStruct event) {
+  Widget _buildAuthorInfo() {
     return Row(
       children: [
         Text(
@@ -175,7 +143,7 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
   }
 
   // Helper method for venue info
-  Widget _buildVenue(ScheduleStruct event) {
+  Widget _buildVenue() {
     return Row(
       children: [
         Text(
@@ -197,7 +165,7 @@ class _ScheduleDetailsViewState extends State<ScheduleDetailsView> {
   }
 
   // Helper method for time info
-  Widget _buildTime(ScheduleStruct event) {
+  Widget _buildTime() {
     return Row(
       children: [
         Text(

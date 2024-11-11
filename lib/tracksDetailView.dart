@@ -123,12 +123,29 @@ class TracksDetailView extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis, // Add ellipsis if text overflows
                                 ),
                               ),
-                              // Place time info in the same row for better alignment
                               Text(event.SLOT_START),
                               Text(" - "),
                               Text(event.SLOT_DATE),
                             ],
                           ),
+                                SizedBox(height: 8.0),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Text(event.SLOT_DATE),
+                                    Text("   ("),
+                                    Text(event.SLOT_START),
+                                    Text(" - "),
+                                    Text(event.SLOT_END),
+                                    Text(" )"),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                         
                         ],
                       ),
                     ],

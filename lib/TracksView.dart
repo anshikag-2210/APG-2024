@@ -30,10 +30,9 @@ class TracksView extends StatelessWidget {
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: groupedThemesData.isEmpty
-          ? Center(child: CircularProgressIndicator()) // Show loading indicator if data is not available
+          ? Center(child: CircularProgressIndicator()) 
           : ListView(
               children: uniqueKeys.map((key) {
-                // For each unique theme key
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -61,10 +60,10 @@ class TracksView extends StatelessWidget {
                             ],
                           ),
                         ),
-                        children: groupedThemesData[key]!.map((_theme) {
+                        children: groupedThemesData[key]!.map((theme) {
                           // Filter schedule data based on theme ID
                           var filteredScheduleData = scheduleDataArr.where((scheduleItem) {
-                            return scheduleItem.TH_ID == _theme.TH_ID;
+                            return scheduleItem.TH_ID == theme.TH_ID;
                           }).toList();
 
                           if (filteredScheduleData.isNotEmpty) {
@@ -89,7 +88,7 @@ class TracksView extends StatelessWidget {
                                   child: Align(
                                     alignment: Alignment.centerLeft, // Aligns text to the left
                                     child: Text(
-                                      _theme.TH_THEME,
+                                      theme.TH_THEME,
                                       style: TextStyle(
                                         color: Color.fromRGBO(70, 116, 167, 1), // Consistent text color for items
                                         fontSize: 14,

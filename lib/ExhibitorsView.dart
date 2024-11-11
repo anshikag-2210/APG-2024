@@ -11,7 +11,7 @@ class ExhibitorsView extends StatelessWidget {
     // Group sponsors by subtype
     final groupedSponsors = <String, List<dynamic>>{};
     for (var sponsor in sponsorsData) {
-      final subtype = sponsor.OS_SUBTYPE ?? 'Other'; // Use 'Other' for null values
+      final subtype = sponsor.OS_SUBTYPE ?? 'Other'; 
       groupedSponsors[subtype] ??= [];
       groupedSponsors[subtype]!.add(sponsor);
     }
@@ -27,7 +27,7 @@ class ExhibitorsView extends StatelessWidget {
         backgroundColor: Color.fromRGBO(70, 116, 167, 1),
       ),
       body: groupedSponsors.isEmpty
-          ? Center(child: Text("No sponsors available."))
+          ? Center(child: Text("No Exhibitors available."))
           : ListView.builder(
               itemCount: groupedSponsors.keys.length,
               itemBuilder: (context, index) {

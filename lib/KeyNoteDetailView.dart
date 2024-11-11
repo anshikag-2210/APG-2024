@@ -15,7 +15,6 @@ class KeyNoteDetailView extends StatefulWidget {
 
 class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
   Set<int> favoritedItems = {};
- 
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
                 radius: 50,
                 backgroundImage: NetworkImage('${DataManager().allUrls["keynoteSpeakersPhotoUrl"]}${widget.keyNoteSpeaker.CMB_ID}.png'),
                 onBackgroundImageError: (error, stackTrace) {
-                  return null; 
+                  return; 
                 },
                 child: Icon(
                   Icons.person, 
@@ -89,7 +88,7 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
                                       '${authPaper.EVT_PAPER_EVENT_PAPERID} (${authPaper.EVT_TYPE})',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Color.fromRGBO(70, 116, 167, 1), 
+                                        color: Color.fromRGBO(234, 242, 255, 1),
                                         fontSize: 13,
                                       ),
                                     ),
@@ -106,11 +105,28 @@ class _KeyNoteDetailViewState extends State<KeyNoteDetailView> {
                                           style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
                                         ),
                                         SizedBox(height: 5),
+                                        Text(
+                                          authPaper.SLOT_VENUE1,
+                                          style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 13), 
+                                        ),
+                                        SizedBox(height: 5),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(authPaper.SLOT_VENUE1),
-                                            Text('${authPaper.SLOT_START} - ${authPaper.SLOT_DATE}'),
+                                            Text(
+                                              authPaper.SLOT_DATE,
+                                              style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
+                                            ),
+                                            Text(" ("),
+                                            Text(
+                                              authPaper.SLOT_START,
+                                              style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
+                                            ),
+                                            Text(" - "),
+                                            Text(
+                                              authPaper.SLOT_END,
+                                              style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
+                                            ),
+                                            Text(" )"),
                                           ],
                                         ),
                                       ],

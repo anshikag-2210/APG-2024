@@ -23,7 +23,7 @@ class FullScreenImageViewer extends StatelessWidget {
       body: PhotoViewGallery.builder(
         scrollPhysics: const BouncingScrollPhysics(),
         builder: (BuildContext context, int index) {
-          String imageUrl = '${images[index].IM_PATH}';
+          String imageUrl = images[index].IM_PATH;
           return PhotoViewGalleryPageOptions(
             imageProvider: NetworkImage(imageUrl),
             initialScale: PhotoViewComputedScale.contained,
@@ -35,7 +35,7 @@ class FullScreenImageViewer extends StatelessWidget {
           // Safely handle expectedTotalBytes
           final totalBytes = event?.expectedTotalBytes ?? 0;
           return Center(
-            child: Container(
+            child: SizedBox(
               width: 20.0,
               height: 20.0,
               child: CircularProgressIndicator(

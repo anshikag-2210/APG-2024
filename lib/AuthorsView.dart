@@ -22,7 +22,7 @@ class AuthorsView extends StatelessWidget {
           return Container(
             margin: EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0), // Space between list items
             decoration: BoxDecoration(
-              color: Colors.lightBlue[50], 
+              color: Color.fromRGBO(234, 242, 255, 1),
               borderRadius: BorderRadius.circular(8.0), // Rounded corners
               boxShadow: [
                 BoxShadow(

@@ -39,7 +39,7 @@ class _AuthorsDetailViewState extends State<AuthorsDetailView> {
                 radius: 50,
                 backgroundImage: NetworkImage('${DataManager().allUrls["authorsPhotoUrl"]}${widget.author.CMB_ID}.png'), 
                 onBackgroundImageError: (error, stackTrace) {
-                  return null; 
+                  return; 
                 },
                 child: Icon(
                   Icons.person, 
@@ -104,11 +104,12 @@ class _AuthorsDetailViewState extends State<AuthorsDetailView> {
                                           style: TextStyle(color: const Color.fromARGB(255, 35, 35, 36), fontSize: 12),
                                         ),
                                         SizedBox(height: 5),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(authPaper.SLOT_VENUE1),
-                                            Text('${authPaper.SLOT_START} - ${authPaper.SLOT_DATE}'),
+                                            SizedBox(height: 5),
+                                            Text('${authPaper.SLOT_DATE}  (${authPaper.SLOT_START} - ${authPaper.SLOT_END})'),
                                           ],
                                         ),
                                       ],

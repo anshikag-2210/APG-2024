@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'data_fetcher.dart'; 
-import 'data_struct.dart'; 
 import 'KeyNoteDetailView.dart'; 
 import 'footerview.dart'; 
 
@@ -38,7 +37,7 @@ class KeynoteSpeakersView extends StatelessWidget {
                     padding: EdgeInsets.all(8.0),
                     margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0), // Space between list items
                     decoration: BoxDecoration(
-                      color: Colors.lightBlue[50], // Very light blue background color
+                      color: Color.fromRGBO(234, 242, 255, 1),// Very light blue background color
                       borderRadius: BorderRadius.circular(8.0), // Rounded corners
                       boxShadow: [
                         BoxShadow(
